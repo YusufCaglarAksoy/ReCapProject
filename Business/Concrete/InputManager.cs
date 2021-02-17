@@ -8,12 +8,15 @@ namespace Business.Concrete
 {
     public class InputManager : IInputService
     {
-        public Brand InputBrand()
-        {
-            Brand brand = new Brand();
+        public Brand InputBrand(bool IdControl)
+        {   
 
-            Console.Write("Marka Id: ");
-            brand.Id = Convert.ToInt32(Console.ReadLine());
+            Brand brand = new Brand();
+            if (IdControl)
+            {
+                Console.Write("Marka Id: ");
+                brand.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.Write("Marka Adı: ");
             brand.BrandName= Console.ReadLine();
@@ -21,12 +24,14 @@ namespace Business.Concrete
             return brand;
         }
 
-        public Car InputCar()
+        public Car InputCar(bool IdControl)
         {
             Car car = new Car();
-
+            if (IdControl) 
+            { 
             Console.Write("Araba Id: ");
             car.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.Write("Araba Marka Id: ");
             car.BrandId = Convert.ToInt32(Console.ReadLine());
@@ -46,12 +51,15 @@ namespace Business.Concrete
             return car;
         }
 
-        public Color InputColor()
+        public Color InputColor(bool IdControl)
         {
             Color color = new Color();
 
-            Console.Write("Renk Id: ");
-            color.Id = Convert.ToInt32(Console.ReadLine());
+            if (IdControl)
+            {
+                Console.Write("Renk Id: ");
+                color.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.Write("Renk Adı: ");
             color.ColorName = Console.ReadLine();
@@ -59,12 +67,15 @@ namespace Business.Concrete
             return color;
         }
 
-        public Customer InputCustomer()
+        public Customer InputCustomer(bool IdControl)
         {
             Customer customer = new Customer();
 
-            Console.Write("Müşteri Id: ");
-            customer.Id = Convert.ToInt32(Console.ReadLine());
+            if (IdControl)
+            {
+                Console.Write("Müşteri Id: ");
+                customer.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.Write("Müşteri Kullanıcı Id: ");
             customer.UserId = Convert.ToInt32(Console.ReadLine());
@@ -83,12 +94,15 @@ namespace Business.Concrete
             return Id;
         }
 
-        public Rental InputRental()
+        public Rental InputRental(bool IdControl)
         {
             Rental rental = new Rental();
 
-            Console.WriteLine("Kiralama Id: " );
-            rental.Id = Convert.ToInt32(Console.ReadLine());
+            if (IdControl)
+            {
+                Console.Write("Kiralama Id: ");
+                rental.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.WriteLine("Kiralama Araba Id: ");
             rental.CarId = Convert.ToInt32(Console.ReadLine());
@@ -102,12 +116,15 @@ namespace Business.Concrete
             return rental;
         }
 
-        public User InputUser()
+        public User InputUser(bool IdControl)
         {
             User user = new User();
 
-            Console.WriteLine("Kullanıcı Id: " );
-            user.Id = Convert.ToInt32(Console.ReadLine());
+            if (IdControl)
+            {
+                Console.Write("Kullanıcı Id: ");
+                user.Id = Convert.ToInt32(Console.ReadLine());
+            }
 
             Console.WriteLine("Kullanıcı Ado: ");
             user.FirstName = Console.ReadLine();
@@ -131,8 +148,8 @@ namespace Business.Concrete
                 "2-->Araba İslemleri\n" +
                 "3-->Renk İslemleri\n" +
                 "4-->Müşteri İslemleri\n" +
-                "5-->Kullanıcı İslemleri\n" +
-                "6-->Kiralama İslemleri\n");
+                "5-->Kiralama İslemleri\n" +
+                "6-->Kullanıcı İslemleri\n");
             Console.Write("İslem Girniz: ");
             int title = Convert.ToInt32(Console.ReadLine());
             return title;

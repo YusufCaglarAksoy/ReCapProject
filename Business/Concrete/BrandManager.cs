@@ -24,19 +24,19 @@ namespace Business.Concrete
         }
         public IResult Add()
         {
-            _brandDal.Add(inputManager.InputBrand());
+            _brandDal.Add(inputManager.InputBrand(false));
             return new Result(true, Messages.BrandAdded);
         }
 
         public IResult Delete()
         {
-            _brandDal.Delete(inputManager.InputBrand());
+            _brandDal.Delete(inputManager.InputBrand(true));
             return new Result(true, Messages.BrandDeleted);
         }
 
         public IResult Update()
         {
-            _brandDal.Update(inputManager.InputBrand());
+            _brandDal.Update(inputManager.InputBrand(true));
             return new Result(true, Messages.BrandUpdated);
         }
 

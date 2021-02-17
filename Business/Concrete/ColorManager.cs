@@ -24,19 +24,19 @@ namespace Business.Concrete
         }
         public IResult Add()
         { 
-            _colorDal.Add(inputManager.InputColor());
+            _colorDal.Add(inputManager.InputColor(false));
             return new Result(true, Messages.ColorAdded);
         }
 
         public IResult Delete()
         {
-            _colorDal.Delete(inputManager.InputColor());
+            _colorDal.Delete(inputManager.InputColor(true));
             return new Result(true, Messages.ColorDeleted);
         }
 
         public IResult Update()
         {
-            _colorDal.Update(inputManager.InputColor());
+            _colorDal.Update(inputManager.InputColor(true));
             return new Result(true, Messages.ColorUpdated);
         }
 

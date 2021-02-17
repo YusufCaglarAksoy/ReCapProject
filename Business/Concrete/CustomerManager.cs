@@ -23,19 +23,19 @@ namespace Business.Concrete
         }
         public IResult Add()
         {
-            _customerDal.Add(inputManager.InputCustomer());
+            _customerDal.Add(inputManager.InputCustomer(false));
             return new Result(true, Messages.CustomerAdded);
         }
 
         public IResult Delete()
         {
-            _customerDal.Delete(inputManager.InputCustomer());
+            _customerDal.Delete(inputManager.InputCustomer(true));
             return new Result(true, Messages.CustomerDeleted);
         }
 
         public IResult Update()
         {
-            _customerDal.Update(inputManager.InputCustomer());
+            _customerDal.Update(inputManager.InputCustomer(true));
             return new Result(true, Messages.CustomerUpdated);
         }
 

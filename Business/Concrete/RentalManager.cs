@@ -23,7 +23,7 @@ namespace Business.Concrete
         }
         public IResult Add()
         {
-            Rental rental = inputManager.InputRental();
+            Rental rental = inputManager.InputRental(false);
             var car = _rentalDal.GetAll(c => c.Id == rental.Id);
 
             foreach (var c in car)
@@ -42,13 +42,13 @@ namespace Business.Concrete
 
         public IResult Delete()
         {
-            _rentalDal.Delete(inputManager.InputRental());
+            _rentalDal.Delete(inputManager.InputRental(true));
             return new Result(true, Messages.RentalDeleted);
         }
 
         public IResult Update()
         {
-            _rentalDal.Update(inputManager.InputRental());
+            _rentalDal.Update(inputManager.InputRental(true));
             return new Result(true, Messages.RentalUpdated);
         }
 

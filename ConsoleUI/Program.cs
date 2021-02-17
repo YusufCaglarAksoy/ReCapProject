@@ -269,7 +269,7 @@ namespace ConsoleUI
                                     result1.Data.Id + "\t\t\t" +
                                     result1.Data.CarId + "\t\t\t" +
                                     result1.Data.CustomerId + "\t\t\t" +
-                                    result1.Data.RentDate + "\t\t" +
+                                    result1.Data.RentDate + "\t" +
                                     result1.Data.ReturnDate);
                                 Console.WriteLine(result1.Message);
                                 break;
@@ -284,7 +284,7 @@ namespace ConsoleUI
                                     rental.Id + "\t\t\t" +
                                     rental.CarId + "\t\t\t" +
                                     rental.CustomerId + "\t\t\t" +
-                                    rental.RentDate + "\t\t" +
+                                    rental.RentDate + "\t" +
                                     rental.ReturnDate);
                                 }
                                 Console.WriteLine(result2.Message);
@@ -320,7 +320,7 @@ namespace ConsoleUI
                                     result1.Data.Id + "\t\t\t" +
                                     result1.Data.FirstName + "\t\t" +
                                     result1.Data.LastName + "\t\t" +
-                                    result1.Data.Email + "\t\t" +
+                                    result1.Data.Email + "\t" +
                                     result1.Data.Password);
                                 Console.WriteLine(result1.Message);
                                 break;
@@ -335,7 +335,7 @@ namespace ConsoleUI
                                     user.Id + "\t\t\t" +
                                     user.FirstName + "\t\t" +
                                     user.LastName + "\t\t" +
-                                    user.Email + "\t\t" +
+                                    user.Email + "\t" +
                                     user.Password);
                                 }
                                 Console.WriteLine(result2.Message);

@@ -28,7 +28,7 @@ namespace Business.Concrete
 
         public IResult Add()
         {
-            Car car = inputManager.InputCar();
+            Car car = inputManager.InputCar(false);
             if (car.Description.Length < 2)
             {
                 return new ErrorResult(Messages.CarDecriptionInvalid);
@@ -46,13 +46,13 @@ namespace Business.Concrete
 
         public IResult Delete()
         {
-            _carDal.Delete(inputManager.InputCar());
+            _carDal.Delete(inputManager.InputCar(true));
             return new Result(true, Messages.CarDeleted);
         }
 
         public IResult Update()
         {
-            _carDal.Update(inputManager.InputCar());
+            _carDal.Update(inputManager.InputCar(true));
             return new Result(true, Messages.CarUpdated);
         }
         

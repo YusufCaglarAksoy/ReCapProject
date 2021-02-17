@@ -41,6 +41,7 @@ namespace Business.Constants
             "Kiralama Tarihi\t\t" +
             "Teslim Tarihi\n" +
             "-----------------------------------" +
+            "-----------------------------------" +
             "-----------------------------------";
 
         public static string UserList =
