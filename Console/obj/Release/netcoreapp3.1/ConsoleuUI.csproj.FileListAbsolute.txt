@@ -1,0 +1,3 @@
+C:\Users\Mehmet\source\repos\ReCapProject\Console\obj\Release\netcoreapp3.1\ConsoleuUI.AssemblyInfoInputs.cache
+C:\Users\Mehmet\source\repos\ReCapProject\Console\obj\Release\netcoreapp3.1\ConsoleuUI.AssemblyInfo.cs
+C:\Users\Mehmet\source\repos\ReCapProject\Console\obj\Release\netcoreapp3.1\ConsoleuUI.csproj.CoreCompileInputs.cache
