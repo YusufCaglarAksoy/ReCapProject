@@ -32,7 +32,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = brandManager.GetById();
+                                var result1 = brandManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.BrandList);
                                 Console.WriteLine(result1.Data.Id + "\t\t\t" + result1.Data.BrandName);
@@ -51,17 +51,17 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = brandManager.Add();
+                                var result3 = brandManager.Add(inputManager.InputBrand(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = brandManager.Update();
+                                var result4 = brandManager.Update(inputManager.InputBrand(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = brandManager.Delete();
+                                var result5 = brandManager.Delete(inputManager.InputBrand(true));
                                 Console.WriteLine(result5.Message);
                                 break;
 
@@ -73,7 +73,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = carManager.GetById();
+                                var result1 = carManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.CarList);
                                 Console.WriteLine(
@@ -106,21 +106,21 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = carManager.Add();
+                                var result3 = carManager.Add(inputManager.InputCar(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = carManager.Update();
+                                var result4 = carManager.Update(inputManager.InputCar(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = carManager.Delete();
+                                var result5 = carManager.Delete(inputManager.InputCar(true));
                                 Console.WriteLine(result5.Message);
                                 break;
                             case 6:
-                                var result6 = carManager.GetCarsByBrandId();
+                                var result6 = carManager.GetCarsByBrandId(inputManager.InputId());
 
                                 Console.WriteLine(Lists.CarList);
                                 foreach (var car in result6.Data)
@@ -137,7 +137,7 @@ namespace ConsoleUI
                                 Console.WriteLine(result6.Message);
                                 break;
                             case 7:
-                                var result7 = carManager.GetCarsByColorId();
+                                var result7 = carManager.GetCarsByColorId(inputManager.InputId());
 
                                 Console.WriteLine(Lists.CarList);
                                 foreach (var car in result7.Data)
@@ -156,7 +156,12 @@ namespace ConsoleUI
                             case 8:
                                 var result8 = carManager.GetCarDetailDtos();
 
-                                Console.WriteLine(Lists.CarList);
+                                Console.WriteLine("Araba \t\t\t" +
+                                    "Marka \t\t\t" +
+                                    "Renk \t\t\t" +
+                                    "Günlük Ücret\t\n" +
+                                    "-----------------------------------" +
+                                    "-----------------------------------");
                                 foreach (var car in result8.Data)
                                 {
                                     Console.WriteLine(
@@ -176,7 +181,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = colorManager.GetById();
+                                var result1 = colorManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.ColorList);
                                 Console.WriteLine(result1.Data.Id + "\t\t\t" + result1.Data.ColorName);
@@ -195,17 +200,17 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = colorManager.Add();
+                                var result3 = colorManager.Add(inputManager.InputColor(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = colorManager.Update();
+                                var result4 = colorManager.Update(inputManager.InputColor(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = colorManager.Delete();
+                                var result5 = colorManager.Delete(inputManager.InputColor(true));
                                 Console.WriteLine(result5.Message);
                                 break;
 
@@ -217,7 +222,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = customerManager.GetById();
+                                var result1 = customerManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.CustomerList);
                                 Console.WriteLine(result1.Data.Id + "\t\t\t"
@@ -240,17 +245,17 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = customerManager.Add();
+                                var result3 = customerManager.Add(inputManager.InputCustomer(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = customerManager.Update();
+                                var result4 = customerManager.Update(inputManager.InputCustomer(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = customerManager.Delete();
+                                var result5 = customerManager.Delete(inputManager.InputCustomer(true));
                                 Console.WriteLine(result5.Message);
                                 break;
 
@@ -262,7 +267,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = rentalManager.GetById();
+                                var result1 = rentalManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.RentalList);
                                 Console.WriteLine(
@@ -291,17 +296,17 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = rentalManager.Add();
+                                var result3 = rentalManager.Add(inputManager.InputRental(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = rentalManager.Update();
+                                var result4 = rentalManager.Update(inputManager.InputRental(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = rentalManager.Delete();
+                                var result5 = rentalManager.Delete(inputManager.InputRental(true));
                                 Console.WriteLine(result5.Message);
                                 break;
 
@@ -313,7 +318,7 @@ namespace ConsoleUI
                         switch (operation2)
                         {
                             case 1:
-                                var result1 = userManager.GetById();
+                                var result1 = userManager.GetById(inputManager.InputId());
 
                                 Console.WriteLine(Lists.UserList);
                                 Console.WriteLine(
@@ -334,7 +339,7 @@ namespace ConsoleUI
                                     Console.WriteLine(
                                     user.Id + "\t\t\t" +
                                     user.FirstName + "\t\t" +
-                                    user.LastName + "\t\t" +
+                                    user.LastName + 
                                     user.Email + "\t" +
                                     user.Password);
                                 }
@@ -342,17 +347,17 @@ namespace ConsoleUI
                                 break;
 
                             case 3:
-                                var result3 = userManager.Add();
+                                var result3 = userManager.Add(inputManager.InputUser(false));
                                 Console.WriteLine(result3.Message);
                                 break;
 
                             case 4:
-                                var result4 = userManager.Update();
+                                var result4 = userManager.Update(inputManager.InputUser(true));
                                 Console.WriteLine(result4.Message);
                                 break;
 
                             case 5:
-                                var result5 = userManager.Delete();
+                                var result5 = userManager.Delete(inputManager.InputUser(true));
                                 Console.WriteLine(result5.Message);
                                 break;
 

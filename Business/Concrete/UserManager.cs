@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -11,33 +12,31 @@ namespace Business.Concrete
 {
     public class UserManager:IUserService
     {
-        EfUserDal _userDal;
+        IUserDal _userDal;
         InputManager inputManager = new InputManager();
-        public UserManager(EfUserDal userDal)
+        public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
         }
-        public IDataResult<User> GetById()
+        public IDataResult<User> GetById(int Id)
         {
-            Console.Write("Id girini: ");
-            int Id = Convert.ToInt32(Console.ReadLine());
-            return new SuccessDataResult<User>(_userDal.Get(c => c.Id == inputManager.InputId()));
+            return new SuccessDataResult<User>(_userDal.Get(c => c.Id == Id));
         }
-        public IResult Add()
+        public IResult Add(User user)
         {
-            _userDal.Add(inputManager.InputUser(false));
+            _userDal.Add(user);
             return new Result(true, Messages.UserAdded);
         }
 
-        public IResult Delete()
+        public IResult Delete(User user)
         {
-            _userDal.Delete(inputManager.InputUser(true));
+            _userDal.Delete(user);
             return new Result(true, Messages.UserDeleted);
         }
 
-        public IResult Update()
+        public IResult Update(User user)
         {
-            _userDal.Update(inputManager.InputUser(true));
+            _userDal.Update(user);
             return new Result(true, Messages.UserUpdated);
         }
 

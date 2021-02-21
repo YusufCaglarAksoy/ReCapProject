@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -11,31 +12,31 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        EfCustomerDal _customerDal;
+        ICustomerDal _customerDal;
         InputManager inputManager = new InputManager();
-        public CustomerManager(EfCustomerDal customerDal)
+        public CustomerManager(ICustomerDal customerDal)
         {
             _customerDal = customerDal;
         }
-        public IDataResult<Customer> GetById()
+        public IDataResult<Customer> GetById(int Id)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == inputManager.InputId()));
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == Id));
         }
-        public IResult Add()
+        public IResult Add(Customer customer)
         {
-            _customerDal.Add(inputManager.InputCustomer(false));
+            _customerDal.Add(customer);
             return new Result(true, Messages.CustomerAdded);
         }
 
-        public IResult Delete()
+        public IResult Delete(Customer customer)
         {
-            _customerDal.Delete(inputManager.InputCustomer(true));
+            _customerDal.Delete(customer);
             return new Result(true, Messages.CustomerDeleted);
         }
 
-        public IResult Update()
+        public IResult Update(Customer customer)
         {
-            _customerDal.Update(inputManager.InputCustomer(true));
+            _customerDal.Update(customer);
             return new Result(true, Messages.CustomerUpdated);
         }
 

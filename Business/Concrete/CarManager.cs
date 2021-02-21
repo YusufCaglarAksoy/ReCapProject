@@ -15,20 +15,19 @@ namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        EfCarDal _carDal;
+        ICarDal _carDal;
         InputManager inputManager = new InputManager();
-        public CarManager(EfCarDal carDal)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
-        public IDataResult<Car> GetById()
+        public IDataResult<Car> GetById(int Id)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == inputManager.InputId()));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == Id));
         }
 
-        public IResult Add()
+        public IResult Add(Car car)
         {
-            Car car = inputManager.InputCar(false);
             if (car.Description.Length < 2)
             {
                 return new ErrorResult(Messages.CarDecriptionInvalid);
@@ -44,15 +43,15 @@ namespace Business.Concrete
             }
         }
 
-        public IResult Delete()
+        public IResult Delete(Car car)
         {
-            _carDal.Delete(inputManager.InputCar(true));
+            _carDal.Delete(car);
             return new Result(true, Messages.CarDeleted);
         }
 
-        public IResult Update()
+        public IResult Update(Car car)
         {
-            _carDal.Update(inputManager.InputCar(true));
+            _carDal.Update(car);
             return new Result(true, Messages.CarUpdated);
         }
         
@@ -62,14 +61,14 @@ namespace Business.Concrete
         }
         
 
-        public IDataResult<List<Car>> GetCarsByBrandId()
+        public IDataResult<List<Car>> GetCarsByBrandId(int Id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == inputManager.InputId()),Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == Id),Messages.CarsListed);
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId()
+        public IDataResult<List<Car>> GetCarsByColorId(int Id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == inputManager.InputId()), Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == Id), Messages.CarsListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailDtos()

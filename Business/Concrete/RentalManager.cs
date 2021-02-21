@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -11,19 +12,18 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        EfRentalDal _rentalDal;
+        IRentalDal _rentalDal;
         InputManager inputManager = new InputManager();
-        public RentalManager(EfRentalDal rentalDal)
+        public RentalManager(IRentalDal rentalDal)
         {
             _rentalDal = rentalDal;
         }
-        public IDataResult<Rental> GetById()
+        public IDataResult<Rental> GetById(int Id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == inputManager.InputId()));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == Id));
         }
-        public IResult Add()
+        public IResult Add(Rental rental)
         {
-            Rental rental = inputManager.InputRental(false);
             var car = _rentalDal.GetAll(c => c.Id == rental.Id);
 
             foreach (var c in car)
@@ -40,15 +40,15 @@ namespace Business.Concrete
             
         }
 
-        public IResult Delete()
+        public IResult Delete(Rental rental)
         {
-            _rentalDal.Delete(inputManager.InputRental(true));
+            _rentalDal.Delete(rental);
             return new Result(true, Messages.RentalDeleted);
         }
 
-        public IResult Update()
+        public IResult Update(Rental rental)
         {
-            _rentalDal.Update(inputManager.InputRental(true));
+            _rentalDal.Update(rental);
             return new Result(true, Messages.RentalUpdated);
         }
 
