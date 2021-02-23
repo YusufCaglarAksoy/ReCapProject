@@ -8,6 +8,8 @@ using System.Text;
 using Core.Utilities.Results;
 using Business.Constants;
 using DataAccess.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -23,6 +25,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == Id));
         }
+
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         { 
             _colorDal.Add(color);

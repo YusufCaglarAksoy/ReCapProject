@@ -104,14 +104,11 @@ namespace Business.Concrete
                 rental.Id = Convert.ToInt32(Console.ReadLine());
             }
 
-            Console.WriteLine("Kiralama Araba Id: ");
+            Console.Write("Kiralama Araba Id: ");
             rental.CarId = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Kiralama Müşteri Id: ");
+            Console.Write("Kiralama Müşteri Id: ");
             rental.CustomerId = Convert.ToInt32(Console.ReadLine());
-
-            Console.WriteLine("Kiralama Tarih: ");
-            rental.RentDate = Convert.ToDateTime(Console.ReadLine());
 
             return rental;
         }
@@ -126,16 +123,16 @@ namespace Business.Concrete
                 user.Id = Convert.ToInt32(Console.ReadLine());
             }
 
-            Console.WriteLine("Kullanıcı Ado: ");
+            Console.Write("Kullanıcı Ado: ");
             user.FirstName = Console.ReadLine();
 
-            Console.WriteLine("Kullanıcı Soyadı: ");
+            Console.Write("Kullanıcı Soyadı: ");
             user.LastName = Console.ReadLine();
 
-            Console.WriteLine("Kullanıcı Email: ");
+            Console.Write("Kullanıcı Email: ");
             user.Email = Console.ReadLine();
 
-            Console.WriteLine("Kullanıcı Şifresi: ");
+            Console.Write("Kullanıcı Şifresi: ");
             user.Password = Convert.ToInt32(Console.ReadLine());
 
             return user;
