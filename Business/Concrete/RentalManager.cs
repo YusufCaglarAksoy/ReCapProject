@@ -2,12 +2,14 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -28,38 +30,51 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var car = _rentalDal.GetAll(c => c.CarId == rental.CarId);
-
-            foreach (var c in car)
+            IResult result = BusinessRules.Run(CheckIfCarIdAvailable(rental.CarId));
+            if (result != null)
             {
-                if (c.ReturnDate == null)
-                {
-                    return new ErrorResult(Messages.RentalErrorAdded);
-                }
+                return result;
             }
             rental.RentDate = DateTime.Now;
-            _rentalDal.Add(rental);
             rental.ReturnDate = null;
-            return new Result(true, Messages.RentalAdded);
+            _rentalDal.Add(rental);
 
-            
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-            return new Result(true, Messages.RentalDeleted);
+            return new SuccessResult(Messages.RentalDeleted);
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
+            IResult result = BusinessRules.Run(CheckIfCarIdAvailable(rental.CarId));
+            if (result != null)
+            {
+                return result;
+            }
+
             _rentalDal.Update(rental);
-            return new Result(true, Messages.RentalUpdated);
+            return new SuccessResult(Messages.RentalUpdated);
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
+        }
+
+        private IResult CheckIfCarIdAvailable(int carId)
+        {
+            var result = _rentalDal.GetAll(c => c.CarId == carId).Any();
+
+            if (result)
+            {
+                return new ErrorResult(Messages.CarIdNotAvailable);
+            }
+            return new SuccessResult();
         }
     }
 }
