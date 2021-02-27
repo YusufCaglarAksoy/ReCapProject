@@ -3,9 +3,11 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
+using Core.Utilities.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,17 +26,14 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Add(CarImage carImage)
+        public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
             if (result != null)
             {
                 return result;
             }
-
-            string path = ImagePaths.ImageFolderPath + Guid.NewGuid().ToString() + ".jpg";
-            File.Copy(carImage.ImagePath, path);
-            carImage.ImagePath = path;
+            carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
 
             _carImageDal.Add(carImage);
@@ -43,13 +42,21 @@ namespace Business.Concrete
 
         public IResult Delete(CarImage carImage)
         {
-            File.Delete(carImage.ImagePath);
+            try
+            {
+                File.Delete(carImage.ImagePath);
+            }
+            catch (Exception exception)
+            {
+
+                return new ErrorResult(exception.Message);
+            }
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Update(CarImage carImage)
+        public IResult Update(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
             if (result != null)
@@ -57,12 +64,7 @@ namespace Business.Concrete
                 return result;
             }
 
-            string deletePath = _carImageDal.Get(cI => cI.CarId == carImage.CarId).ImagePath;
-            File.Delete(deletePath);
-
-            string path = ImagePaths.ImageFolderPath + Guid.NewGuid().ToString() + ".jpg";
-            File.Copy(carImage.ImagePath, path);
-
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
@@ -72,18 +74,22 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.CarImagesListed);
         }
 
-        public IDataResult<List<CarImage>> GetById(int Id)
+        public IDataResult<List<CarImage>> GetByCarId(int Id)
         {
             IResult result = BusinessRules.Run(CheckIfCarIdExists(Id));
-            if (!result.Success)
+            if (result!=null)
             {
-                return new SuccessDataResult<List<CarImage>>(new List<CarImage> { new CarImage { ImagePath = ImagePaths.ImageDefaultPath } });
+                string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\Images\logo.png");
+                return new ErrorDataResult<List<CarImage>>(new List<CarImage> { new CarImage { CarId = Id, ImagePath = path, Date = DateTime.Now } },result.Message);
             }
 
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(cI => cI.CarId == Id), Messages.CarImagesListed);
         }
 
-
+        public IDataResult<CarImage> Get(int id)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == id));
+        }
 
         private IResult CheckIfCarImageLimitedExceded(int Id)
         {
@@ -98,6 +104,7 @@ namespace Business.Concrete
 
         private IResult CheckIfCarIdExists(int carId)
         {
+
             var result = _carImageDal.GetAll(p => p.CarId == carId).Count();
             if (result == 0)
             {
@@ -105,10 +112,9 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-
         private IResult CheckIfCarImagePathTypeCorrect(string imagePath)
         {
-            string acceptableExtensions = ".jpg";
+            string acceptableExtensions = ".jpg|png|jpeg";
             if (string.Compare(imagePath, acceptableExtensions) == 0)
             {
                 return new ErrorResult(Messages.CarImagePathTypeIsFalse);

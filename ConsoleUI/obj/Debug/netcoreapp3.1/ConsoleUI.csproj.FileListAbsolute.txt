@@ -66,3 +66,5 @@ C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Auto
 C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
 C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Mehmet\source\repos\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
