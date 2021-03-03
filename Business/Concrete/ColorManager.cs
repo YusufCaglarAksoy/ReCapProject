@@ -1,15 +1,11 @@
 ﻿using Business.Abstract;
-using DataAccess.Concrete.EntityFramework;
-using System;
-using System.Collections.Generic;
-using Entities.Concrete;
-using System.Linq.Expressions;
-using System.Text;
-using Core.Utilities.Results;
 using Business.Constants;
-using DataAccess.Abstract;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
+using Entities.Concrete;
+using System.Collections.Generic;
 
 namespace Business.Concrete
 {

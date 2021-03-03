@@ -1,12 +1,7 @@
 ﻿using Core.Utilities.Results;
-using DataAccess.Abstract;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace Business.Abstract
 {

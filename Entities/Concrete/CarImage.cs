@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
-using Core.Entities;
+﻿using Core.Entities;
+using System;
 
 namespace Entities.Concrete
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Business.Constants
+﻿namespace Business.Constants
 {
     public static class Messages
     {
@@ -46,5 +42,7 @@ namespace Business.Constants
         public static string CarImageLimitExceded = "Bu Araba için Yeterli Fotoğraf Var";
 
         public static string CarImagePathTypeIsFalse = "Girilen Dosya Tipi Yanlış";
+
+        public static string AuthorizationDenied = "Yetkiniz yok";
     }
 }

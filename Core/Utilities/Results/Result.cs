@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Core.Utilities.Results
+﻿namespace Core.Utilities.Results
 {
     public class Result : IResult
     {
-        public Result(bool success, string message):this(success)
+
+        public Result(bool succes, string message):this(succes)
         {
             Message = message;
         }
 
-        public Result(bool success)
+        public Result(bool succes)
         {
-            Success = success;
+            Success = succes;
         }
 
         public bool Success { get; }

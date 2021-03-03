@@ -1,8 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -131,9 +130,6 @@ namespace Business.Concrete
 
             Console.Write("Kullanıcı Email: ");
             user.Email = Console.ReadLine();
-
-            Console.Write("Kullanıcı Şifresi: ");
-            user.Password = Convert.ToInt32(Console.ReadLine());
 
             return user;
         }

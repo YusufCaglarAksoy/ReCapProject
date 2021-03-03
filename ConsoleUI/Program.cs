@@ -1,10 +1,7 @@
 ﻿using Business.Concrete;
 using Business.Constants;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
-using Entities.Concrete;
 using System;
-using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -326,8 +323,7 @@ namespace ConsoleUI
                                     result1.Data.Id + "\t\t\t" +
                                     result1.Data.FirstName + "\t\t" +
                                     result1.Data.LastName + "\t\t" +
-                                    result1.Data.Email + "\t" +
-                                    result1.Data.Password);
+                                    result1.Data.Email + "\t" );
                                 Console.WriteLine(result1.Message);
                                 break;
 
@@ -341,8 +337,7 @@ namespace ConsoleUI
                                     user.Id + "\t\t\t" +
                                     user.FirstName + "\t\t" +
                                     user.LastName + 
-                                    user.Email + "\t" +
-                                    user.Password);
+                                    user.Email + "\t" );
                                 }
                                 Console.WriteLine(result2.Message);
                                 break;
