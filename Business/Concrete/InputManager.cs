@@ -14,7 +14,7 @@ namespace Business.Concrete
             if (IdControl)
             {
                 Console.Write("Marka Id: ");
-                brand.Id = Convert.ToInt32(Console.ReadLine());
+                brand.brandId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Marka Adı: ");
@@ -22,14 +22,14 @@ namespace Business.Concrete
 
             return brand;
         }
-
+        
         public Car InputCar(bool IdControl)
         {
             Car car = new Car();
             if (IdControl) 
             { 
             Console.Write("Araba Id: ");
-            car.Id = Convert.ToInt32(Console.ReadLine());
+            car.carId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Araba Marka Id: ");
@@ -57,7 +57,7 @@ namespace Business.Concrete
             if (IdControl)
             {
                 Console.Write("Renk Id: ");
-                color.Id = Convert.ToInt32(Console.ReadLine());
+                color.colorId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Renk Adı: ");
@@ -73,7 +73,7 @@ namespace Business.Concrete
             if (IdControl)
             {
                 Console.Write("Müşteri Id: ");
-                customer.Id = Convert.ToInt32(Console.ReadLine());
+                customer.CustomerId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Müşteri Kullanıcı Id: ");
@@ -100,7 +100,7 @@ namespace Business.Concrete
             if (IdControl)
             {
                 Console.Write("Kiralama Id: ");
-                rental.Id = Convert.ToInt32(Console.ReadLine());
+                rental.RentalId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Kiralama Araba Id: ");
@@ -119,7 +119,7 @@ namespace Business.Concrete
             if (IdControl)
             {
                 Console.Write("Kullanıcı Id: ");
-                user.Id = Convert.ToInt32(Console.ReadLine());
+                user.UserId = Convert.ToInt32(Console.ReadLine());
             }
 
             Console.Write("Kullanıcı Ado: ");

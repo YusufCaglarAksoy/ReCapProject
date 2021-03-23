@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -27,29 +28,31 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
-            if (result != null)
-            {
-                return result;
-            }
+            //var result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage));
+
+            //if(result != null)
+            //{
+            //    return result;
+            //}
+            
             carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
-
             _carImageDal.Add(carImage);
+
             return new SuccessResult(Messages.CarImageAdded);
         }
 
         public IResult Delete(CarImage carImage)
         {
-            try
-            {
-                File.Delete(carImage.ImagePath);
-            }
-            catch (Exception exception)
-            {
+            var oldpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot")) + _carImageDal.Get(I => I.carImageId == carImage.carImageId).ImagePath;
 
-                return new ErrorResult(exception.Message);
+            var result = BusinessRules.Run(FileHelper.Delete(oldpath));
+
+            if (result != null)
+            {
+                return result;
             }
+
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
@@ -57,20 +60,20 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
+            IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
             if (result != null)
             {
                 return result;
             }
 
-            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.carImageId == carImage.carImageId).ImagePath, file);
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
-        public IDataResult<List<CarImage>> GetAll()
+        public IDataResult<List<CarImage>> GetAll(Expression<Func<CarImage, bool>> filter = null)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.CarImagesListed);
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(filter), Messages.CarImagesListed);
         }
 
         public IDataResult<List<CarImage>> GetByCarId(int Id)
@@ -87,12 +90,12 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> Get(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == id));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.carImageId == id));
         }
 
-        private IResult CheckIfCarImageLimitedExceded(int Id)
+        private IResult CheckIfCarImageLimitedExceded(CarImage carImage)
         {
-            var result = _carImageDal.GetAll(cI => cI.CarId == Id).Count;
+            var result = _carImageDal.GetAll(c => c.CarId == carImage.CarId).Count;
 
             if (result >= 5)
             {

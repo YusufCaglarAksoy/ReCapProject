@@ -1,4 +1,3 @@
-C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\WebAPI.exe
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\WebAPI.deps.json
@@ -74,3 +73,4 @@ C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\Castle.
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\FluentValidation.dll
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+C:\Users\Mehmet\source\repos\ReCapProject\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (var context = new CarRentalContext())
             {
                 var result = from oC in context.OperationClaims
-                             join uOC in context.UserOperationClaims on oC.Id equals uOC.OperationClaimId where uOC.UserId == user.Id
+                             join uOC in context.UserOperationClaims on oC.Id equals uOC.OperationClaimId where uOC.UserId == user.UserId
                              select new OperationClaim 
                              { 
                                  Id = oC.Id, 

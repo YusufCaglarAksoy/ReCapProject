@@ -3,7 +3,9 @@ using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Interceptors;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Core.Aspects.Autofac.Validation
 {
@@ -12,9 +14,10 @@ namespace Core.Aspects.Autofac.Validation
         private Type _validatorType;
         public ValidationAspect(Type validatorType)
         {
+            //defensive coding
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
-                throw new System.Exception("Bu bir doğrulama snıfı değil");
+                throw new System.Exception("Bu bir doğrulama sınıfı değil");
             }
 
             _validatorType = validatorType;

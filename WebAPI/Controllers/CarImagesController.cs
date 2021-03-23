@@ -20,10 +20,10 @@ namespace WebAPI.Controllers
             public IFormFile files { get; set; }
         }
 
-        [HttpPost("GetByCarId")]
-        public IActionResult GetByCarId([FromForm(Name = ("Id"))] int Id)
+        [HttpGet("GetByCarId")]
+        public IActionResult GetByCarId(int Id)
         {
-            var result = _carImageService.GetByCarId(Id);
+            var result = _carImageService.GetAll(I => I.CarId == Id);
             if (result.Success)
             {
                 return Ok(result);

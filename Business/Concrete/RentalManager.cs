@@ -6,6 +6,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Business.Concrete
         }
         public IDataResult<Rental> GetById(int Id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == Id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.RentalId == Id));
         }
 
         [ValidationAspect(typeof(RentalValidator))]
@@ -48,12 +49,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
-        {
-            IResult result = BusinessRules.Run(CheckIfCarIdAvailable(rental.CarId));
-            if (result != null)
-            {
-                return result;
-            }
+        {   
 
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
@@ -62,6 +58,11 @@ namespace Business.Concrete
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.RentalsListed);
         }
 
         private IResult CheckIfCarIdAvailable(int carId)
