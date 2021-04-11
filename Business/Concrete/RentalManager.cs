@@ -16,10 +16,14 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
+        private ICarService _carService;
+        private ICustomerService _customerService;
         InputManager inputManager = new InputManager();
-        public RentalManager(IRentalDal rentalDal)
+        public RentalManager(IRentalDal rentalDal, ICarService carService, ICustomerService customerService)
         {
             _rentalDal = rentalDal;
+            _customerService = customerService;
+            _carService = carService;
         }
         public IDataResult<Rental> GetById(int Id)
         {
@@ -29,7 +33,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            IResult result = BusinessRules.Run(CheckIfCarIdAvailable(rental.CarId));
+            IResult result = BusinessRules.Run(CheckIfCarIdAvailable(rental.CarId),CheckFindeksPoint(rental));
             if (result != null)
             {
                 return result;
@@ -63,6 +67,21 @@ namespace Business.Concrete
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.RentalsListed);
+        }
+
+        public IResult CheckFindeksPoint(Rental rental)
+        {
+            var cars = _carService.GetById(rental.CarId).Data;
+            var findeksPoint = _customerService.GetById(rental.CustomerId).Data.FindeksScore;
+            foreach (var car in cars)
+            {
+                if (car.FindeksScore > findeksPoint)
+                {
+                    return new ErrorResult("Findeks Puanı Yetersiz");
+                }    
+            }
+            return new SuccessResult();
+
         }
 
         private IResult CheckIfCarIdAvailable(int carId)

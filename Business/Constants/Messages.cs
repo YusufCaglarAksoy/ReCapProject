@@ -44,5 +44,11 @@
         public static string CarImagePathTypeIsFalse = "Girilen Dosya Tipi Yanlış";
 
         public static string AuthorizationDenied = "Yetkiniz yok";
+
+        public static string CardAdded = "Kart Eklendi";
+        public static string CardDeleted = "Kart Silindi";
+        public static string CardUpdated = "Kart Güncellendi";
+        public static string CardCorrect = "Kart Doğrulandı";
+        public static string CardUnCorrect = "Kart Geçersiz";
     }
 }

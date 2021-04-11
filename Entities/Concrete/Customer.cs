@@ -7,5 +7,6 @@ namespace Entities.Concrete
         public int CustomerId { get; set; }
         public int UserId { get; set; }
         public string CompanyName { get; set; }
+        public int FindeksScore { get; set; }
     }
 }
