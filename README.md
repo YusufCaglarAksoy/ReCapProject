@@ -13,10 +13,17 @@ https://www.youtube.com/watch?v=Dw5ZxGlgDEU
 Yusuf Çağlar Aksoy
 
 İnstagram: https://www.instagram.com/l.ycaksoy.l
+
 GitHub: https://github.com/YusufCaglarAksoy
+
 Linkedin: https://www.linkedin.com/in/yusuf-çağlar-aksoy-81b4b6207
+
 E-Mail= yusufcaglar_aksoy@hotmail.com
 
+
 Project:
+
 Backend: https://github.com/YusufCaglarAksoy/ReCapProject
+
 Frontend: https://github.com/YusufCaglarAksoy/carRentalFrontend
+
