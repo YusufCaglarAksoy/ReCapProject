@@ -10,6 +10,12 @@ Fırat Üniversitesi 2. Sınıf Yazılım Mühendisliği Öğrencisiyim.
 https://www.youtube.com/watch?v=Dw5ZxGlgDEU
 
 
-<video src="https://www.youtube.com/watch?v=Dw5ZxGlgDEU" controls>
-  Your browser does not support the video tag.
+ <video width="600" height="500" controls="controls" >
+ 
+ <source src="https://www.youtube.com/watch?v=Dw5ZxGlgDEU.mp4" type="video/mp4">
+ 
+ <source src="https://www.youtube.com/watch?v=Dw5ZxGlgDEU.ogg" type="video/ogg">
+ 
+Tarayıcınız video etiketini desteklemiyor.
+
 </video>
